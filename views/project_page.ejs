@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+
+            background: url("https://images.hdqwalls.com/wallpapers/mixed-colors-abstract-4k-v6.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            margin: 0%;
+            padding: 0%;
+        }
+
+        .navbar {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(50, 48, 75, 0.171);
+        }
+
+        footer {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(50, 48, 75, 0.164);
+        }
+
+        .mainDiv {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mainSec {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 90%;
+
+        }
+
+        .projectDeets {
+            height: 50%;
+            min-width: 30%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .projectContainer {
+            width: 70%;
+            height: 70%;
+            padding: 5%;
+        }
+
+        .projectCard {
+            backdrop-filter: blur(150px) saturate(100%);
+            -webkit-backdrop-filter: blur(16px) saturate(100%);
+            background-color: rgb(0, 0, 0);
+            color: #ffffff;
+        }
+
+        .issueContainer {
+            backdrop-filter: blur(5px) saturate(100%);
+            -webkit-backdrop-filter: blur(5px) saturate(180%);
+            background-color: rgba(98, 148, 241, 0.199);
+            border-radius: 12px;
+            max-height: 70vh;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2%;
+            margin: auto;
+        }
+
+        .issueDeets {
+            width: 70%;
+            max-height: 70%;
+            overflow: scroll;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(17, 25, 40, 0.75);
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .issueCardContainer {
+            width: 70%;
+            max-height: 80%;
+        }
+
+        .cardContainer {
+            padding: 2%;
+            margin: 2%;
+            overflow: scroll;
+        }
+
+        .issueCard {
+            margin: 2%;
+            background-color: rgba(0, 0, 0, 0.26);
+            color: #ffffff;
+            backdrop-filter: blur(150px) saturate(100%);
+        }
+
+        h5.card-title {
+            text-transform: lowercase;
+        }
+
+        h4.card-title {
+            text-transform: uppercase;
+        }
+
+        h5.card-title:first-letter {
+            text-transform: uppercase;
+        }
+
+
+        .filterAndSearch {
+            width: 60%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin: auto;
+            padding-bottom: 2%;
+        }
+
+        #issueModal {
+
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px) saturate(100%);
+            -webkit-backdrop-filter: blur(10px) saturate(100%);
+            background-color: #45526e70;
+        }
+
+        .issue-modal-content {
+            color: rgb(253, 253, 253);
+            backdrop-filter: blur(50px) saturate(100%);
+            -webkit-backdrop-filter: blur(50px) saturate(100%);
+            background-color: rgba(231, 109, 109, 0.274);
+            width: 20%;
+            border-radius: 12px;
+
+        }
+
+        .filterModal {
+            backdrop-filter: blur(10px) saturate(100%);
+            -webkit-backdrop-filter: blur(10px) saturate(100%);
+            background-color: #45526e70;
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .modal-dialog {
+            margin-top: 10%;
+        }
+
+        .modal-content {
+            backdrop-filter: blur(50px) saturate(100%);
+            -webkit-backdrop-filter: blur(50px) saturate(100%);
+            background-color: rgba(231, 109, 109, 0.274);
+            border-radius: 12px;
+            color: #ffffff;
+
+        }
+
+
+        .close {
+            color: #ffffff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            max-width: fit-content;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .txt404 {
+            color: #ffffff;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainDiv">
+        <nav class="navbar navbar-dark mx-auto d-flex justify-content-center"
+            style="left: 0; top: 0; width: 100%; z-index: 150;">
+            <div class="titleBar w-75 d-flex justify-content-around">
+                <a class="navbar-brand ms-4" href="/" style="font-weight:bolder"> Issue Tracker </a>
+
+                <button id="issueBtn" class="btn btn-danger">Create New Bug</button>
+
+
+            </div>
+
+        </nav>
+        <div id="issueModal" class="modal">
+            <div class="issue-modal-content">
+                <form action="/project/<%=project._id%>" method="POST">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h4>Create New Issue</h4>
+                        <span class="close d-flex align-items-end">&times;</span>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row mb-3 m-auto">
+                            <label for="titlelabel" class="col-sm-4 col-form-label">Title</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="title" placeholder="Title" required class="form-control"
+                                    id="titlelabel" />
+                            </div>
+                        </div>
+                        <div class="row mb-3 m-auto">
+                            <label for="descriptionlabel" class="col-sm-4 col-form-label">Description</label>
+                            <div class="col-sm-8">
+                                <textarea name="description" placeholder="Describe your issue..." required
+                                    class="form-control" id="descriptionlabel" style="height: 100px"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 m-auto">
+                            <label for="labels" class="col-sm-4 col-form-label">Add Labels</label>
+
+                            <div class="col-sm-8">
+                                <input class="form-check-input" name="labels" type="checkbox" value="Bug" id="bug" />
+                                <label class="form-check-label" for="bug"> Bug </label><br /><input name="labels"
+                                    class="form-check-input" type="checkbox" value="UI Improvement"
+                                    id="ui-improvement" />
+                                <label class="form-check-label" for="ui-improvement">
+                                    UI Improvement </label><br /><input name="labels" class="form-check-input"
+                                    type="checkbox" value="Documentation" id="documentation" />
+                                <label class="form-check-label" for="documentation">
+                                    Documentation </label><br /><input name="labels" class="form-check-input"
+                                    type="checkbox" value="Enhancement" id="enhancement" />
+                                <label class="form-check-label" for="enhancement">
+                                    Enhancement </label><br /><input name="labels" class="form-check-input"
+                                    type="checkbox" value="Duplicate" id="duplicate" />
+                                <label class="form-check-label" for="duplicate"> Duplicate </label>
+                            </div>
+                        </div>
+                        <div class="row mb-3 m-auto">
+                            <label for="authorlabel" class="col-sm-4 col-form-label">Author</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="author" placeholder="Author" required class="form-control"
+                                    id="authorlabel" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="closeBtn btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-success">Add new bug</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="mainSec">
+            <div class="projectDeets">
+                <div class="projectContainer">
+                    <div class="card projectCard">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <%= project.name %>
+                            </h4>
+                            <hr />
+                            <h5 class="card-title">
+                                <%= project.description %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2">
+                                Author : <%= project.author %>
+                            </h6>
+                            <hr />
+                            <button id="issueBtn2" class="btn btn-danger">Create New Bug</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="issueContainer">
+                <% if(project.issues.length>= 1) { %>
+                    <div class="filterAndSearch">
+                        <button type="button" onClick="showAllIssues()" class="btn btn-primary">
+                            Show All Bugs
+                        </button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#filterModal">
+                            Filter Bugs
+                        </button>
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#searchmodal">
+                            Search Bugs
+                        </button>
+
+                    </div>
+                    <div class="issueDeets">
+                        <div class="issueCardContainer">
+                            <div class="cardContainer" id="issues-list">
+                                <% for(let issue of project.issues){ %>
+                                    <div id="all-issues" class="card issueCard">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                <%= issue.title %>
+                                            </h4>
+                                            <hr>
+                                            <h5 class="card-title">
+                                                <%= issue.description %>
+                                            </h5>
+                                            <h6 class="card-subtitle mb-2">
+                                                Author : <%= issue.author %>
+                                            </h6>
+                                            <hr>
+                                            Labels : <%= issue.labels %>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                            <div class="cardContainer" id="filtered-issues-list">
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+            <!-- Filter Modal -->
+            <div class="modal filterModal" id="filterModal" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Filter Issues</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <form action="/" method="get" id="filter-issue-form">
+                            <div class="row mb-3 m-auto">
+                                <label for="labels" class="col-sm-4 col-form-label">Search by
+                                    Label</label>
+
+                                <div class="col-sm-8">
+                                    <% for( let label of project.labels) { %>
+                                        <input class="form-check-input" name="labels" type="checkbox"
+                                            value="<%= label %>" id="<%=label%>" />
+                                        <label class="form-check-label" for="<%=label%>">
+                                            <%=label%>
+                                        </label><br />
+                                        <% } %>
+                                </div>
+                            </div>
+                            <div class="row mb-3 m-auto">
+                                <label for="authorlabel" class="col-sm-4 col-form-label">Author</label>
+                                <div class="col-sm-8">
+                                    <input class="form-check-input" name="author" type="radio" checked="checked"
+                                        value="" id="null" />
+                                    <label class="form-check-label" for="null">None</label><br />
+                                    <% for( let issue of project.issues ) { %>
+                                        <input class="form-check-input" name="author" type="radio"
+                                            value="<%= issue.author %>" id="<%= issue.author %>" />
+                                        <label class="form-check-label" for="<%= issue.author %>">
+                                            <%= issue.author %>
+                                        </label><br />
+                                        <% } %>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">
+                                    See Issues
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Search Modal -->
+            <div class="modal searchModal" id="searchmodal" tabindex="-1" aria-labelledby="searchmodalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="searchmodalLabel">Search Issues</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/" method="get" id="search-issue-form">
+                            <div class="row mb-3 m-auto">
+                                <label for="titlelabel" class="col-sm-4 col-form-label">Title</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="tie" placeholder="Search by title.." class="form-control"
+                                        id="titlelabel" />
+                                </div>
+                            </div>
+                            <div class="row mb-3 m-auto">
+                                <label for="desclabel" class="col-sm-4 col-form-label">Description</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="des" placeholder="Search by description..."
+                                        class="form-control" id="authorlabel" />
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">
+                                    See Issues
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
+                <div class="txt404">
+                    <h4>No Bugs Found!</h4>
+
+                    <br>
+                    Please create one if you encounter any bugs/issues in the project!
+                </div>
+                <% } %>
+
+
+        </div>
+
+
+        <div id="issue-data" data="<%=JSON.stringify(project.issues)%>"></div>
+        <script src="/js/filterIssues.js"></script>
+        <script src="/js/searchIssues.js"></script>
+    </div>
+    <footer class="text-center text-lg-start text-white" style="position:fixed; left: 0; bottom: 0; width: 100%">
+        <section class="p-3 pt-0">
+            <div class="row d-flex align-items-center">
+                <!-- Grid column -->
+                <div class="col-md-7 col-lg-8 text-center text-md-start">
+                    <!-- Copyright -->
+                    <div class="p-3">
+                        © 2023 Copyright:
+                        <span>
+                            Vibhash
+                        </span>
+                    </div>
+                    <!-- Copyright -->
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                    <a href="https://github.com/vibhashk007" target="_blank"
+                        class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                        <i class="fa-brands fa-github fa-2xl" style="color:white"></i>
+                    </a>
+
+
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    </div>
+</body>
+<script>
+    // Get the modal
+    var modal = document.getElementById("issueModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("issueBtn");
+    var btn2 = document.getElementById("issueBtn2");
+
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    var closeBtn = document.getElementsByClassName("closeBtn")[0];
+    var span = document.getElementsByClassName("close")[0];
+
+    var closeBtn = document.getElementsByClassName("closeBtn")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "flex";
+    }
+    btn2.onclick = function () {
+        modal.style.display = "flex";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+
+
+</script>
+
+</html>

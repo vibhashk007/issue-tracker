@@ -1,0 +1,347 @@
+<head>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            min-width: 100vw;
+            height: 100vh;
+            background: url("https://images.hdqwalls.com/wallpapers/mixed-colors-abstract-4k-v6.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .projectContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 2%;
+
+        }
+
+        body .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 100%;
+            margin: 40px 0;
+        }
+
+        body .container .card {
+            position: relative;
+            min-width: 320px;
+            height: 400px;
+            backdrop-filter: blur(5px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(199, 201, 204, 0.178);
+            border-radius: 15px;
+            margin: 30px;
+            transition: 0.5s;
+        }
+
+
+        body .container .card .box {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background: #0e0e0ec7;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        body .container .card .box:hover {
+            transform: translateY(-25px);
+        }
+
+        body .container .card .box:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        body .container .card .box .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        body .container .card .box .content h2 {
+            position: absolute;
+            top: -10px;
+            right: 30px;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.1);
+
+        }
+
+        body .container .card .box .content h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            z-index: 1;
+            transition: 0.5s;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        body .container .card .box .content h5 {
+            font-size: 1rem;
+            color: rgb(94, 94, 94);
+            z-index: 1;
+            transition: 0.5s;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        body .container .card .box .content p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+            transition: 0.5s;
+            text-transform: capitalize;
+        }
+
+        body .container .card .box .content a {
+            position: relative;
+            display: inline-block;
+            padding: 8px 20px;
+            background: black;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: 0.5s;
+        }
+
+        body .container .card .box .content a:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            background: #fff;
+            color: #000;
+        }
+
+        .project404 {
+            color: #fff;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            color: aliceblue;
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px) saturate(100%);
+            -webkit-backdrop-filter: blur(10px) saturate(100%);
+        }
+
+
+        /* Modal Content/Box */
+        .modal-content {
+            backdrop-filter: blur(50px) saturate(100%);
+            -webkit-backdrop-filter: blur(50px) saturate(100%);
+            background-color: rgba(180, 180, 180, 0.075);
+            padding: 20px;
+            width: 20%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            max-width: fit-content;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .projectDeets {
+            background-color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Your HTML code here -->
+    <nav class="navbar navbar-dark mx-auto d-flex justify-content-center"
+        style="background-color: #45526e; position: fixed; left: 0; top: 0; width: 100%; z-index:2">
+        <div class="titleBar w-75 d-flex justify-content-around">
+            <a class="navbar-brand ms-4" href="/" style="font-weight:bolder"> Issue Tracker </a>
+
+            <button id="myBtn" class="btn btn-light">Create New Project</button>
+
+        </div>
+
+    </nav>
+
+    <div class="projectContainer d-flex justify-content-center align-items-center">
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h4>Add New Project</h4>
+                    <span class="close d-flex align-items-end">&times;</span>
+                </div>
+                <form action="/project/create" method="POST">
+                    <div class="modal-body">
+                        <div class="row mb-3 m-auto">
+                            <label for="namelabel" class="col-sm-4 col-form-label">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="name" placeholder="Name of your project" required
+                                    class="form-control" id="namelabel" />
+                            </div>
+                        </div>
+                        <div class="row mb-3 m-auto">
+                            <label for="inputPassword3" class="col-sm-4 col-form-label">Description</label>
+                            <div class="col-sm-8">
+                                <textarea name="description" placeholder="Write something about your project..."
+                                    required class="form-control" id="inputPassword3" style="height: 100px"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3 m-auto">
+                            <label for="authorlabel" class="col-sm-4 col-form-label">Author</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="author" placeholder="Author" required class="form-control"
+                                    id="authorlabel" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="closeBtn btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-success">Create project</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="container">
+            <% if (projects.length>=1) { %>
+                <% for( let project of projects ) { %>
+                    <div class="card">
+                        <div class="box">
+                            <div class="content">
+                                <h2>project</h2>
+                                <h3>
+                                    <%= project.name %>
+                                </h3>
+                                <p>
+                                    <%= project.description %>
+                                </p>
+                                <h5>
+                                    <strong> Author : </strong>
+                                    <%= project.author %>
+                                </h5>
+                                <a href="/project/<%=project._id%>">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                        <% } else { %>
+                            <h3 class="project404">No projects Found</h3>
+                            <% } %>
+        </div>
+
+    </div>
+    <footer class="text-center text-lg-start text-white"
+        style="background-color: #45526e; position: fixed; left: 0; bottom: 0; width: 100%">
+        <section class="p-3 pt-0">
+            <div class="row d-flex align-items-center">
+                <!-- Grid column -->
+                <div class="col-md-7 col-lg-8 text-center text-md-start">
+                    <!-- Copyright -->
+                    <div class="p-3">
+                        © 2023 Copyright:
+                        <span>
+                            Vibhash
+                        </span>
+                    </div>
+                    <!-- Copyright -->
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                    <a href="https://github.com/vibhashk007" target="_blank"
+                        class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                        <i class="fa-brands fa-github fa-2xl"></i>
+                    </a>
+
+
+                </div>
+            </div>
+        </section>
+        </div>
+    </footer>
+</body>
+
+
+<script>
+    var modal = document.getElementById("myModal");
+
+    var btn = document.getElementById("myBtn");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    var closeBtn = document.getElementsByClassName("closeBtn")[0];
+
+    btn.onclick = function () {
+        modal.style.display = "flex";
+    }
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } 
+</script>
