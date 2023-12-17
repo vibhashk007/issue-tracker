@@ -15,7 +15,7 @@
             align-items: center;
             flex-wrap: wrap;
             min-width: 100vw;
-            height: 100vh;
+            height: 90vh;
             background: url("https://images.hdqwalls.com/wallpapers/mixed-colors-abstract-4k-v6.jpg");
             background-position: center;
             background-repeat: no-repeat;
@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin: 2%;
+            margin: 5%;
 
         }
 
@@ -147,6 +147,8 @@
             color: #fff;
         }
 
+
+
         /* The Modal (background) */
         .modal {
             color: aliceblue;
@@ -193,13 +195,25 @@
         .projectDeets {
             background-color: #888;
         }
+
+        .navbar {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(50, 48, 75, 0.171);
+        }
+
+        footer {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(50, 48, 75, 0.164);
+        }
     </style>
 </head>
 
 <body>
     <!-- Your HTML code here -->
     <nav class="navbar navbar-dark mx-auto d-flex justify-content-center"
-        style="background-color: #45526e; position: fixed; left: 0; top: 0; width: 100%; z-index:2">
+        style="position: fixed; left: 0; top: 0; width: 100%; z-index:2">
         <div class="titleBar w-75 d-flex justify-content-around">
             <a class="navbar-brand ms-4" href="/" style="font-weight:bolder"> Issue Tracker </a>
 
@@ -262,24 +276,27 @@
         <div class="container">
             <% if (projects.length>=1) { %>
                 <% for( let project of projects ) { %>
-                    <div class="card">
-                        <div class="box">
-                            <div class="content">
-                                <h2>project</h2>
-                                <h3>
-                                    <%= project.name %>
-                                </h3>
-                                <p>
-                                    <%= project.description %>
-                                </p>
-                                <h5>
-                                    <strong> Author : </strong>
-                                    <%= project.author %>
-                                </h5>
-                                <a href="/project/<%=project._id%>">Read More</a>
+                    <div class="projectCardContainer">
+                        <div class="card">
+                            <div class="box">
+                                <div class="content">
+                                    <h2>project</h2>
+                                    <h3>
+                                        <%= project.name %>
+                                    </h3>
+                                    <p>
+                                        <%= project.description %>
+                                    </p>
+                                    <h5>
+                                        <strong> Author : </strong>
+                                        <%= project.author %>
+                                    </h5>
+                                    <a href="/project/<%=project._id%>">Read More</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <% } %>
                         <% } else { %>
                             <h3 class="project404">No projects Found</h3>
@@ -287,8 +304,7 @@
         </div>
 
     </div>
-    <footer class="text-center text-lg-start text-white"
-        style="background-color: #45526e; position: fixed; left: 0; bottom: 0; width: 100%">
+    <footer class="text-center text-lg-start text-white" style="position: fixed; left: 0; bottom: 0; width: 100%">
         <section class="p-3 pt-0">
             <div class="row d-flex align-items-center">
                 <!-- Grid column -->
@@ -308,7 +324,7 @@
                 <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                     <a href="https://github.com/vibhashk007" target="_blank"
                         class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                        <i class="fa-brands fa-github fa-2xl"></i>
+                        <i class="fa-brands fa-github fa-2xl" style="color:white"></i>
                     </a>
 
 
