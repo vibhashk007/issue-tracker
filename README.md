@@ -8,7 +8,7 @@
    To install The project locally follow these steps:
    
    - Clone the repositry on your local machine 
-     > git clone https://github.com/github/training-kit.git
+     > git clone https://github.com/vibhashk007/issue-tracker.git
      
    - Install all the dependencies:
       - npm install
